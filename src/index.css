@@ -573,12 +573,12 @@ button {
   width: 100%;
   max-width: 100vw;
   overflow: hidden;
-  padding: 0.75rem 0;
+  padding: 20px 0 24px 0;
   box-sizing: border-box;
 }
 
 .centered-carousel-viewport {
-  --card-width: calc(100vw - 2.5rem);
+  --card-width: calc(100vw - 32px);
   --card-gap: 1.25rem;
   width: 100%;
   overflow: visible;
@@ -591,13 +591,16 @@ button {
   width: 100%;
   will-change: transform;
   align-items: stretch;
+  padding: 12px 0 16px 0;
 }
 
 .centered-card-slide {
   flex: 0 0 var(--card-width);
   width: var(--card-width);
+  max-width: 440px;
   cursor: pointer;
   box-sizing: border-box;
+  padding: 4px;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
@@ -623,7 +626,7 @@ button {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
   height: 100%;
   box-sizing: border-box;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
@@ -631,61 +634,65 @@ button {
 
 .centered-card-slide.is-active .split-testimonial-card {
   border-color: rgba(0, 0, 0, 0.18);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
 }
 
-/* Left Column: Dedicated Client Image / Visual Area */
+/* Mobile Image Area: 16:9 Aspect Ratio with Face Centering */
 .card-visual-pane {
   width: 100%;
-  height: 230px;
+  height: auto;
+  aspect-ratio: 16 / 9;
   position: relative;
   overflow: hidden;
   background: #F4F3EE;
   flex-shrink: 0;
+  border-radius: 18px 18px 0 0;
 }
 
 .client-portrait-img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 22%;
   display: block;
 }
 
 .client-portrait-placeholder {
   width: 100%;
   height: 100%;
+  aspect-ratio: 16 / 9;
   background: linear-gradient(135deg, #1A1A1A 0%, #2A2A28 50%, #151515 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
-  padding: 1.5rem;
+  padding: 1.25rem;
   box-sizing: border-box;
   position: relative;
 }
 
 .placeholder-monogram {
   font-family: var(--font-serif-display) !important;
-  font-size: 2.75rem;
+  font-size: 2.25rem;
   font-weight: 600;
   color: #F0EFEA;
   letter-spacing: 0.08em;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
   line-height: 1;
 }
 
 .placeholder-brandmark {
   font-family: var(--font-serif-accent) !important;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.18em;
   color: #B5B2A8;
 }
 
 /* Right Column: Structured Editorial Content */
 .card-content-pane {
-  padding: 1.75rem 1.5rem;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -702,16 +709,16 @@ button {
 /* 1. Small Testimonial Category / Title */
 .card-testimonial-category {
   font-family: var(--font-serif-accent) !important;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   color: var(--text-subtle);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
   line-height: 1.2;
 }
 
-/* 2. Review / Testimonial Text (Primary Content ~22px on desktop) */
+/* 2. Review / Testimonial Text (Primary Content ~18-20px on mobile) */
 .card-testimonial-quote {
   font-family: var(--font-serif-heading) !important;
   font-size: 1.15rem;
@@ -725,8 +732,8 @@ button {
 /* 3 & 4. Client Information */
 .card-author-block {
   border-top: 1px solid var(--border-light);
-  padding-top: 1.15rem;
-  margin-top: 1.35rem;
+  padding-top: 1rem;
+  margin-top: 1.25rem;
 }
 
 .card-author-name {
@@ -746,7 +753,7 @@ button {
 
 /* Centered Navigation Controls Below Card */
 .carousel-bottom-nav-controls {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1269,6 +1276,11 @@ button {
     --card-gap: 1.5rem;
   }
 
+  .centered-card-slide {
+    max-width: none;
+    padding: 6px;
+  }
+
   .split-testimonial-card {
     display: grid;
     grid-template-columns: 36% 64%;
@@ -1279,6 +1291,17 @@ button {
   .card-visual-pane {
     height: 100%;
     min-height: 380px;
+    aspect-ratio: auto;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .client-portrait-img {
+    aspect-ratio: auto;
+    object-position: center top;
+  }
+
+  .client-portrait-placeholder {
+    aspect-ratio: auto;
   }
 
   .card-content-pane {
@@ -1326,6 +1349,11 @@ button {
     --card-gap: 2rem;
   }
 
+  .centered-card-slide {
+    max-width: none;
+    padding: 8px;
+  }
+
   .split-testimonial-card {
     grid-template-columns: 38% 62%;
     min-height: 420px;
@@ -1334,6 +1362,8 @@ button {
 
   .card-visual-pane {
     min-height: 420px;
+    border-radius: 24px 0 0 24px;
+    aspect-ratio: auto;
   }
 
   .card-content-pane {
