@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Testimonials() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const testimonials = [
     {
@@ -44,6 +45,17 @@ export default function Testimonials() {
     },
   ];
 
+  // 3-Second Autoplay with infinite loop
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev < testimonials.length - 1 ? prev + 1 : 0));
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [isPaused, testimonials.length]);
+
   const handlePrev = () => {
     setActiveIdx((prev) => (prev > 0 ? prev - 1 : testimonials.length - 1));
   };
@@ -53,7 +65,14 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="testimonials-section" id="testimonials">
+    <section
+      className="testimonials-section"
+      id="testimonials"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+    >
       <div className="container">
         {/* Section Header — Exactly Preserved */}
         <div className="testimonials-header">
@@ -61,28 +80,8 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Centered Carousel Track Container */}
+      {/* Centered Carousel Viewport */}
       <div className="centered-carousel-wrapper">
-        {/* Left Navigation Arrow */}
-        <button
-          type="button"
-          className="carousel-control-btn btn-prev"
-          onClick={handlePrev}
-          aria-label="Previous Testimonial"
-        >
-          <ChevronLeft size={24} />
-        </button>
-
-        {/* Right Navigation Arrow */}
-        <button
-          type="button"
-          className="carousel-control-btn btn-next"
-          onClick={handleNext}
-          aria-label="Next Testimonial"
-        >
-          <ChevronRight size={24} />
-        </button>
-
         <div className="centered-carousel-viewport">
           <motion.div
             className="centered-carousel-track"
@@ -90,7 +89,7 @@ export default function Testimonials() {
               x: `calc(50% - (${activeIdx} * (var(--card-width) + var(--card-gap)) + (var(--card-width) / 2)))`,
             }}
             transition={{
-              duration: 0.6,
+              duration: 0.55,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
@@ -103,7 +102,7 @@ export default function Testimonials() {
                   onClick={() => setActiveIdx(idx)}
                 >
                   <article className="split-testimonial-card">
-                    {/* Left Column: Dedicated Client Image / Visual Area */}
+                    {/* Left Side: Large Integrated Client Image */}
                     <div className="card-visual-pane">
                       {item.image ? (
                         <img
@@ -113,26 +112,27 @@ export default function Testimonials() {
                         />
                       ) : (
                         <div className="client-portrait-placeholder">
-                          <div className="placeholder-pattern" />
                           <span className="placeholder-monogram">{item.initials}</span>
                           <span className="placeholder-brandmark">❖ ONE CATALYST</span>
                         </div>
                       )}
                     </div>
 
-                    {/* Right Column: Structured Editorial Content */}
+                    {/* Right Side: Structured Typography Hierarchy */}
                     <div className="card-content-pane">
                       <div className="card-content-top">
-                        {/* 1. Main Testimonial Title */}
-                        <h3 className="card-testimonial-title">{item.title}</h3>
+                        {/* 1. Small Category / Title (Uppercase, 14-16px, Letter-spaced, Muted) */}
+                        <div className="card-testimonial-category">
+                          {item.title}
+                        </div>
 
-                        {/* 2. Review / Testimonial Text */}
+                        {/* 2. Primary Review Text (~22px on desktop, Serif Italic, Line-height 1.5) */}
                         <p className="card-testimonial-quote">
                           “{item.quote.replace(/^“|”$/g, '')}”
                         </p>
                       </div>
 
-                      {/* 3 & 4. Client Information */}
+                      {/* 3 & 4. Client Information & Divider */}
                       <div className="card-author-block">
                         <div className="card-author-name">{item.person}</div>
                         <div className="card-author-role">{item.role}</div>
@@ -146,18 +146,38 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Pagination Dots */}
+      {/* Centered Navigation Controls Below Card */}
       <div className="container">
-        <div className="carousel-dots-row">
-          {testimonials.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              className={`carousel-dot ${activeIdx === idx ? 'active' : ''}`}
-              onClick={() => setActiveIdx(idx)}
-              aria-label={`Go to testimonial ${idx + 1}`}
-            />
-          ))}
+        <div className="carousel-bottom-nav-controls">
+          <button
+            type="button"
+            className="carousel-nav-arrow"
+            onClick={handlePrev}
+            aria-label="Previous Testimonial"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          <div className="carousel-dots-row">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className={`carousel-dot ${activeIdx === idx ? 'active' : ''}`}
+                onClick={() => setActiveIdx(idx)}
+                aria-label={`Go to testimonial ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="carousel-nav-arrow"
+            onClick={handleNext}
+            aria-label="Next Testimonial"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
       </div>
     </section>
