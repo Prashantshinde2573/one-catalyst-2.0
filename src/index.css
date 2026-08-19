@@ -1485,9 +1485,26 @@ button {
   }
 
   .hero-subpointers {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 880px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.25rem;
+    max-width: 720px;
     margin-bottom: 2.5rem;
+  }
+
+  .subpointer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    max-width: 145px;
+  }
+
+  .subpointer-icon {
+    margin-top: 0.2rem;
+  }
+
+  .subpointer-text {
+    line-height: 1.35;
   }
 
   .prefooter-grid {
@@ -1511,6 +1528,21 @@ button {
     min-height: 540px;
     padding: 60px 0;
     background-position: 75% center;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.86) 35%,
+      rgba(255, 255, 255, 0.40) 65%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
   }
 
   .flying-chips-container {
