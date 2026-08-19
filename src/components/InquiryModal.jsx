@@ -168,6 +168,16 @@ export default function InquiryModal({ isOpen, initialTab = 'contact', onClose }
                   <button type="submit" className="btn-primary-dark" style={{ width: '100%' }}>
                     Submit Partner Application
                   </button>
+
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdEcrfd-2jd3Me1r0cFzuCcT827cPXcQyfRVrgp08LwVlNw_w/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary-outline"
+                    style={{ width: '100%', display: 'block', textAlign: 'center', marginTop: '0.75rem' }}
+                  >
+                    Open Google Application Form ↗
+                  </a>
                 </form>
               )}
             </>

@@ -41,13 +41,14 @@ export default function Hero({ onOpenModal }) {
             >
               Contact Us
             </button>
-            <button
-              type="button"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdEcrfd-2jd3Me1r0cFzuCcT827cPXcQyfRVrgp08LwVlNw_w/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-secondary-outline"
-              onClick={() => onOpenModal('partner')}
             >
               Become a channel Partner
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>
