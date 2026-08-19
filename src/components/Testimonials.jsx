@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Testimonials() {
@@ -9,21 +9,21 @@ export default function Testimonials() {
     {
       title: 'Facilitating capital',
       quote:
-        "Honestly, I thought it would take months. It didn't. A few of the right conversations, and the funding came through, quietly and efficiently. That is exactly how I wanted it",
+        'Honestly, I thought it would take months. It didn’t. A few of the right conversations, and the funding came through, quietly and efficiently. That is exactly how I wanted it',
       person: 'Devendra Singh',
       role: 'Managing Director, Real Estate Group',
     },
     {
       title: 'The right connection',
       quote:
-        'I already knew what I wanted to do. I just didn\'t know the right person to speak to. That introduction happened within a week, and it changed everything.”',
+        'I already knew what I wanted to do. I just didn’t know the right person to speak to. That introduction happened within a week, and it changed everything.”',
       person: 'Aarohi Drabu',
       role: 'Founder & CEO, GCC Company',
     },
     {
       title: 'Navigating a tough situation',
       quote:
-        "It was complicated, and a lot of people needed to come together. I still don't know how they managed it, but somehow everything fell into place. Quietly, professionally, and on time",
+        'It was complicated, and a lot of people needed to come together. I still don’t know how they managed it, but somehow everything fell into place. Quietly, professionally, and on time',
       person: 'Nikhil Harihar',
       role: 'Chief of Staff, Technology Startup',
     },
@@ -44,90 +44,105 @@ export default function Testimonials() {
     setActiveIdx((prev) => (prev < testimonials.length - 1 ? prev + 1 : 0));
   };
 
+  // Format quotes cleanly
+  const formatQuote = (q) => {
+    let clean = q.trim();
+    if (clean.startsWith('“') || clean.startsWith('"')) {
+      clean = clean.substring(1);
+    }
+    if (clean.endsWith('”') || clean.endsWith('"')) {
+      clean = clean.substring(0, clean.length - 1);
+    }
+    return `“${clean}”`;
+  };
+
   return (
     <section className="testimonials-section" id="testimonials">
       <div className="container">
-        {/* Section Header */}
+        {/* Section Header (Preserved Exactly) */}
         <div className="testimonials-header">
           <h2 className="section-heading-serif">What we people say about us</h2>
         </div>
+      </div>
 
-        {/* Desktop Grid Layout */}
-        <div className="testimonials-grid desktop-only-grid">
-          {testimonials.map((item, idx) => (
-            <motion.article
-              key={item.title}
-              className="testimonial-card-frame"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-            >
-              <div className="quote-mark-icon" aria-hidden="true">“</div>
-              <h3 className="testimonial-heading">{item.title}</h3>
-              <p className="testimonial-body">{item.quote}</p>
-              <div className="testimonial-author-box">
-                <div className="author-fullname">{item.person}</div>
-                <div className="author-title">{item.role}</div>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-
-        {/* Mobile Swipeable Slider View */}
-        <div className="testimonials-mobile-slider mobile-only-slider">
-          <div className="slider-card-container">
-            <AnimatePresence mode="wait">
-              <motion.article
-                key={activeIdx}
-                className="testimonial-card-frame mobile-card"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.25 }}
-              >
-                <div className="quote-mark-icon" aria-hidden="true">“</div>
-                <h3 className="testimonial-heading">{testimonials[activeIdx].title}</h3>
-                <p className="testimonial-body">{testimonials[activeIdx].quote}</p>
-                <div className="testimonial-author-box">
-                  <div className="author-fullname">{testimonials[activeIdx].person}</div>
-                  <div className="author-title">{testimonials[activeIdx].role}</div>
-                </div>
-              </motion.article>
-            </AnimatePresence>
-          </div>
-
-          {/* Controls on Mobile */}
-          <div className="slider-controls-mobile">
-            <button
-              type="button"
-              className="mobile-nav-arrow"
-              onClick={handlePrev}
-              aria-label="Previous Testimonial"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            <div className="pagination-dots">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  className={`dot-indicator ${activeIdx === idx ? 'active' : ''}`}
+      {/* Editorial Carousel Viewport */}
+      <div className="editorial-carousel-viewport">
+        <div className="editorial-carousel-container">
+          <motion.div
+            className="editorial-carousel-track"
+            animate={{
+              x: `calc(-${activeIdx} * (var(--card-width) + var(--card-gap)))`,
+            }}
+            transition={{
+              duration: 0.55,
+              ease: [0.25, 1, 0.5, 1],
+            }}
+          >
+            {testimonials.map((item, idx) => {
+              const isActive = activeIdx === idx;
+              return (
+                <div
+                  key={item.person}
+                  className={`editorial-card-wrapper ${isActive ? 'is-active' : ''}`}
                   onClick={() => setActiveIdx(idx)}
-                  aria-label={`Slide ${idx + 1}`}
-                />
-              ))}
-            </div>
+                >
+                  <article className="editorial-testimonial-card">
+                    <div className="editorial-card-top">
+                      <p className="editorial-quote-text">
+                        {formatQuote(item.quote)}
+                      </p>
+                    </div>
 
-            <button
-              type="button"
-              className="mobile-nav-arrow"
-              onClick={handleNext}
-              aria-label="Next Testimonial"
-            >
-              <ChevronRight size={20} />
-            </button>
+                    <div className="editorial-author-block">
+                      <div className="editorial-author-name">{item.person}</div>
+                      <div className="editorial-author-role">{item.role}</div>
+                    </div>
+                  </article>
+                </div>
+              );
+            })}
+          </motion.div>
+
+          {/* Floating Subtle Navigation Arrows */}
+          <button
+            type="button"
+            className="editorial-nav-btn prev-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePrev();
+            }}
+            aria-label="Previous Testimonial"
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          <button
+            type="button"
+            className="editorial-nav-btn next-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNext();
+            }}
+            aria-label="Next Testimonial"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      </div>
+
+      {/* Pagination Dots */}
+      <div className="container">
+        <div className="editorial-pagination-row">
+          <div className="pagination-dots">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className={`dot-indicator ${activeIdx === idx ? 'active' : ''}`}
+                onClick={() => setActiveIdx(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

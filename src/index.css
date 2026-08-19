@@ -557,6 +557,8 @@ button {
   padding: 40px 0;
   border-bottom: 1px solid var(--border-light);
   background-color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
 }
 
 .testimonials-header {
@@ -564,102 +566,143 @@ button {
   margin-bottom: 2rem;
 }
 
-.testimonials-carousel-wrapper {
+/* Editorial Carousel Viewport */
+.editorial-carousel-viewport {
+  --card-width: 100%;
+  --card-gap: 1.25rem;
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.editorial-carousel-container {
   position: relative;
   width: 100%;
 }
 
-.testimonial-card-frame {
-  border: 1px solid var(--border-card);
-  border-radius: 4px;
-  padding: 1.75rem 1.35rem;
-  background: #FFFFFF;
+.editorial-carousel-track {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--shadow-sm);
+  gap: var(--card-gap);
+  width: 100%;
+  will-change: transform;
+}
+
+.editorial-card-wrapper {
+  flex: 0 0 var(--card-width);
+  width: var(--card-width);
+  cursor: pointer;
   box-sizing: border-box;
 }
 
-.quote-mark-icon {
-  font-family: var(--font-serif-display) !important;
-  font-size: 2.5rem;
-  line-height: 1;
-  color: #141414;
-  margin-bottom: 0.5rem;
-}
-
-.testimonial-heading {
-  font-family: var(--font-serif-display) !important;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-main);
-  margin-bottom: 0.75rem;
-}
-
-.testimonial-body {
-  font-family: var(--font-serif-heading) !important;
-  font-size: 1.02rem;
-  font-style: italic;
-  line-height: 1.6;
-  color: var(--text-main);
-  margin-bottom: 1.25rem;
-  flex-grow: 1;
-}
-
-.testimonial-author-box {
-  border-top: 1px solid var(--border-light);
-  padding-top: 0.75rem;
-}
-
-.author-fullname {
-  font-family: var(--font-serif-heading) !important;
-  font-size: 1.02rem;
-  font-weight: 600;
-  color: var(--text-main);
-  margin-bottom: 0.15rem;
-}
-
-.author-title {
-  font-family: var(--font-serif-body) !important;
-  font-size: 0.88rem;
-  color: var(--text-subtle);
-}
-
-/* Mobile Slider View */
-.testimonials-mobile-slider {
+/* Large Editorial Testimonial Card (Inspired by reference) */
+.editorial-testimonial-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
+  padding: 2.25rem 1.75rem;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.slider-controls-mobile {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 0.5rem;
-  margin-top: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  box-sizing: border-box;
+  height: 100%;
 }
 
-.mobile-nav-arrow {
+.editorial-card-wrapper.is-active .editorial-testimonial-card {
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.editorial-testimonial-card:hover {
+  border-color: #111111;
+  transform: translateY(-2px);
+}
+
+.editorial-card-top {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.editorial-quote-text {
+  font-family: var(--font-serif-display) !important;
+  font-size: clamp(1.35rem, 4.5vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.editorial-author-block {
+  border-top: 1px solid var(--border-light);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+
+.editorial-author-name {
+  font-family: var(--font-serif-heading) !important;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.editorial-author-role {
+  font-family: var(--font-serif-body) !important;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Floating Subtle Navigation Arrows */
+.editorial-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border-card);
-  background: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #111111;
-  box-shadow: var(--shadow-sm);
+  color: var(--text-main);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
 }
 
-.desktop-only-grid {
-  display: none;
+.editorial-nav-btn:hover {
+  background: #111111;
+  color: #FFFFFF !important;
+  border-color: #111111;
+  transform: translateY(-50%) scale(1.05);
 }
 
-.mobile-only-slider {
-  display: block;
+.editorial-nav-btn.prev-btn {
+  left: 6px;
+}
+
+.editorial-nav-btn.next-btn {
+  right: 6px;
+}
+
+.editorial-pagination-row {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pagination-dots {
@@ -1149,14 +1192,23 @@ button {
     padding: 80px 0 40px 0;
   }
 
-  .desktop-only-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+  .editorial-carousel-viewport {
+    --card-width: 68%;
+    --card-gap: 1.5rem;
   }
 
-  .mobile-only-slider {
-    display: none;
+  .editorial-testimonial-card {
+    padding: 3rem 2.5rem;
+    min-height: 400px;
+    border-radius: 24px;
+  }
+
+  .editorial-nav-btn.prev-btn {
+    left: 0;
+  }
+
+  .editorial-nav-btn.next-btn {
+    right: 0;
   }
 
   .team-cards-grid {
@@ -1190,6 +1242,22 @@ button {
     display: none;
   }
 
+  .editorial-carousel-viewport {
+    --card-width: 58%;
+    --card-gap: 1.75rem;
+  }
+
+  .editorial-testimonial-card {
+    padding: 3.5rem 3rem;
+    min-height: 420px;
+    border-radius: 28px;
+  }
+
+  .editorial-quote-text {
+    font-size: clamp(1.55rem, 2.1vw, 2.2rem);
+    line-height: 1.32;
+  }
+
   .hero-desktop-br {
     display: block;
   }
@@ -1213,10 +1281,6 @@ button {
 
   .hero-visual-frame {
     aspect-ratio: 4 / 3;
-  }
-
-  .desktop-only-grid {
-    grid-template-columns: repeat(4, 1fr);
   }
 
   .prefooter-grid {
