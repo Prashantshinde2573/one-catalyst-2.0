@@ -57,7 +57,7 @@ html {
   scroll-behavior: smooth;
   background-color: var(--bg-main);
   color: var(--text-main);
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -65,14 +65,13 @@ body {
   line-height: 1.6;
   background-color: var(--bg-main);
   color: var(--text-main);
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   position: relative;
 }
 
 #root,
 .site-wrapper {
-  overflow-x: hidden;
   width: 100%;
   position: relative;
 }
@@ -104,10 +103,13 @@ button {
   padding-right: var(--container-pad);
 }
 
-/* --- Header / Navigation Bar --- */
+/* --- Header / Navigation Bar (Sticky Top) --- */
 .site-header {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
