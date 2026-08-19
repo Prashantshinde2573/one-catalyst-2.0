@@ -23,12 +23,13 @@
   --border-card: #E5E3DC;
   --border-hover: rgba(0, 0, 0, 0.35);
 
-  /* Strict Serif Fonts (Zero Sans-Serif) */
-  --font-serif-logo: 'Fraunces', Georgia, serif;
-  --font-serif-display: 'Playfair Display', 'Newsreader', Georgia, serif;
-  --font-serif-heading: 'Newsreader', 'Playfair Display', Georgia, serif;
-  --font-serif-body: 'Newsreader', 'EB Garamond', Georgia, serif;
-  --font-serif-accent: 'Cinzel', 'Playfair Display', Georgia, serif;
+  /* Typography: Space Grotesk */
+  --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif-logo: 'Fraunces', 'Space Grotesk', serif;
+  --font-serif-display: 'Space Grotesk', sans-serif;
+  --font-serif-heading: 'Space Grotesk', sans-serif;
+  --font-serif-body: 'Space Grotesk', sans-serif;
+  --font-serif-accent: 'Space Grotesk', sans-serif;
 
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -40,16 +41,27 @@
   --container-pad: 1.25rem;
 }
 
-/* --- Universal Reset: Strict Serif Font Override --- */
+/* --- Universal Reset: Space Grotesk --- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: var(--font-serif-body) !important;
+  font-family: 'Space Grotesk', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Section Headings Font Weight 600 */
+h1, h2, h3, h4, h5, h6,
+.hero-title,
+.section-heading-serif,
+.section-heading,
+.faqs-main-title,
+.prefooter-heading,
+.modal-title {
+  font-weight: 600 !important;
 }
 
 html {
@@ -313,7 +325,7 @@ button {
 .hero-title {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(2.25rem, 6.5vw, 3.85rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: var(--text-main);
@@ -429,7 +441,7 @@ button {
 .section-heading-serif {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(2rem, 6vw, 3.25rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
   color: var(--text-main);
@@ -917,7 +929,7 @@ button {
 .faqs-main-title {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(2.25rem, 5vw, 3.25rem);
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 2rem;
   color: var(--text-main);
   text-align: center;
@@ -1027,7 +1039,7 @@ button {
 .prefooter-title {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(1.75rem, 5vw, 3rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.015em;
   color: var(--text-main);
