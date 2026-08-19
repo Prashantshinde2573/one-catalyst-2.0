@@ -1234,3 +1234,10 @@ button {
     font-size: 4rem;
   }
 }
+
+@media (max-width:767px) {
+  .flying-chips-container {
+    gap: 0px;
+  }
+
+}
