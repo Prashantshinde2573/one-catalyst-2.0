@@ -43,9 +43,6 @@ export default function FAQs() {
     },
   ];
 
-  const col1 = faqs.slice(0, 3);
-  const col2 = faqs.slice(3, 6);
-
   const toggleItem = (id) => {
     setOpenItems((prev) => ({
       ...prev,
@@ -64,7 +61,9 @@ export default function FAQs() {
           aria-expanded={isOpen}
         >
           <span className="faq-q-text">{faq.question}</span>
-          <span className="faq-toggle-sign" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+          <span className={`faq-toggle-sign ${isOpen ? 'is-open' : ''}`} aria-hidden="true">
+            {isOpen ? '−' : '+'}
+          </span>
         </button>
 
         <AnimatePresence initial={false}>
@@ -74,7 +73,7 @@ export default function FAQs() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             >
               {faq.answer.split('\n\n').map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
@@ -89,11 +88,13 @@ export default function FAQs() {
   return (
     <section className="faqs-section" id="faqs">
       <div className="container">
-        <h2 className="faqs-main-title">FAQs</h2>
+        <div className="faqs-centered-container">
+          <h2 className="faqs-main-title">FAQs</h2>
 
-        <div className="faqs-two-column-grid">
-          <div className="faq-column">{col1.map(renderFaqItem)}</div>
-          <div className="faq-column">{col2.map(renderFaqItem)}</div>
+          {/* Single Centered Column FAQ List */}
+          <div className="faqs-single-column-list">
+            {faqs.map(renderFaqItem)}
+          </div>
         </div>
       </div>
     </section>
