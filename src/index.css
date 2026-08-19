@@ -23,12 +23,12 @@
   --border-card: #E5E3DC;
   --border-hover: rgba(0, 0, 0, 0.35);
 
-  /* Typography: Space Grotesk */
-  --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif-logo: 'Fraunces', 'Space Grotesk', serif;
+  /* Typography: Space Grotesk (Sans-Serif) & Fraunces Logo */
+  --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif-logo: 'Fraunces', serif;
   --font-serif-display: 'Space Grotesk', sans-serif;
   --font-serif-heading: 'Space Grotesk', sans-serif;
-  --font-serif-body: 'Space Grotesk', sans-serif;
+  --font-serif-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif-accent: 'Space Grotesk', sans-serif;
 
   /* Shadows */
@@ -41,27 +41,34 @@
   --container-pad: 1.25rem;
 }
 
-/* --- Universal Reset: Space Grotesk --- */
+/* --- Universal Reset: Space Grotesk Sans-Serif --- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Space Grotesk', sans-serif !important;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Section Headings Font Weight 600 */
+/* Section Headings: Font Weight 600 */
 h1, h2, h3, h4, h5, h6,
 .hero-title,
 .section-heading-serif,
 .section-heading,
 .faqs-main-title,
+.prefooter-title,
 .prefooter-heading,
+.team-member-name,
 .modal-title {
+  font-family: 'Space Grotesk', sans-serif !important;
   font-weight: 600 !important;
+}
+
+.brand-logo-text {
+  font-family: 'Fraunces', serif !important;
 }
 
 html {
@@ -325,7 +332,7 @@ button {
 .hero-title {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(2.25rem, 6.5vw, 3.85rem);
-  font-weight: 600;
+  font-weight: 600 !important;
   line-height: 1.15;
   letter-spacing: -0.025em;
   color: var(--text-main);
@@ -441,7 +448,7 @@ button {
 .section-heading-serif {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(2rem, 6vw, 3.25rem);
-  font-weight: 600;
+  font-weight: 600 !important;
   letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
   color: var(--text-main);
@@ -929,7 +936,7 @@ button {
 .faqs-main-title {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(2.25rem, 5vw, 3.25rem);
-  font-weight: 600;
+  font-weight: 600 !important;
   margin-bottom: 2rem;
   color: var(--text-main);
   text-align: center;
@@ -1039,7 +1046,7 @@ button {
 .prefooter-title {
   font-family: var(--font-serif-display) !important;
   font-size: clamp(1.75rem, 5vw, 3rem);
-  font-weight: 600;
+  font-weight: 600 !important;
   line-height: 1.25;
   letter-spacing: -0.015em;
   color: var(--text-main);
